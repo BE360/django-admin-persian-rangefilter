@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-20 15:50+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: rangefilter/apps.py:11
+msgid "Range Filter"
+msgstr ""
+
+#: rangefilter/filter.py:153 rangefilter/filter.py:201
+msgid "From date"
+msgstr "از تاریخ"
+
+#: rangefilter/filter.py:159 rangefilter/filter.py:207
+msgid "To date"
+msgstr "تا تاریخ"
+
+#: rangefilter/templates/rangefilter/date_filter.html:5
+#: rangefilter/templates/rangefilter/date_filter_1_8.html:2
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: rangefilter/templates/rangefilter/date_filter.html:127
+#: rangefilter/templates/rangefilter/date_filter_1_8.html:89
+msgid "Search"
+msgstr "جستجو"
+
+#: rangefilter/templates/rangefilter/date_filter.html:128
+#: rangefilter/templates/rangefilter/date_filter_1_8.html:90
+msgid "Reset"
+msgstr "پاک‌کردن"

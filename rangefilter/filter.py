@@ -20,10 +20,29 @@ from django.utils import timezone
 from django.template.defaultfilters import slugify
 from django.templatetags.static import StaticNode
 from django.utils.translation import ugettext as _
+from django.forms.widgets import TextInput
 from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime as BaseAdminSplitDateTime
 
 
+class PersianDateWidget(TextInput):
+    format_key = 'PERSIAN_DATE_INPUT_FORMATS'
+    supports_microseconds = False
+
+    def __init__(self, attrs=None, format=None):
+        final_attrs = {'class': 'vPersianDateField', 'size': '10'}
+        if attrs is not None:
+            final_attrs.update(attrs)
+        super(PersianDateWidget, self).__init__(attrs=final_attrs)
+        self.format = format if format else None
+
+
 class AdminSplitDateTime(BaseAdminSplitDateTime):
+    def __init__(self, attrs=None):
+        widgets = [PersianDateWidget, PersianDateWidget]
+        # Note that we're calling MultiWidget, not SplitDateTimeWidget, because
+        # we want to define widgets.
+        forms.MultiWidget.__init__(self, widgets, attrs)
+
     def format_output(self, rendered_widgets):
         return format_html('<p class="datetime">{}</p><p class="datetime rangetime">{}</p>',
                            rendered_widgets[0],
@@ -128,32 +147,28 @@ class DateRangeFilter(admin.filters.FieldListFilter):
 
     def _get_form_fields(self):
         return OrderedDict((
-                (self.lookup_kwarg_gte, forms.DateField(
-                    label='',
-                    widget=AdminDateWidget(attrs={'placeholder': _('From date')}),
-                    localize=True,
-                    required=False
-                )),
-                (self.lookup_kwarg_lte, forms.DateField(
-                    label='',
-                    widget=AdminDateWidget(attrs={'placeholder': _('To date')}),
-                    localize=True,
-                    required=False
-                )),
+            (self.lookup_kwarg_gte, forms.DateField(
+                label='',
+                widget=PersianDateWidget(attrs={'placeholder': _('From date')}),
+                localize=True,
+                required=False
+            )),
+            (self.lookup_kwarg_lte, forms.DateField(
+                label='',
+                widget=PersianDateWidget(attrs={'placeholder': _('To date')}),
+                localize=True,
+                required=False
+            )),
         ))
 
     @staticmethod
     def get_js():
         return [
-            StaticNode.handle_simple('admin/js/calendar.js'),
-            StaticNode.handle_simple('admin/js/admin/DateTimeShortcuts.js'),
         ]
 
     @staticmethod
     def _get_media():
         js = [
-            'calendar.js',
-            'admin/DateTimeShortcuts.js',
         ]
         css = [
             'widgets.css',
@@ -175,18 +190,18 @@ class DateTimeRangeFilter(DateRangeFilter):
 
     def _get_form_fields(self):
         return OrderedDict((
-                (self.lookup_kwarg_gte, forms.SplitDateTimeField(
-                    label='',
-                    widget=AdminSplitDateTime(attrs={'placeholder': _('From date')}),
-                    localize=True,
-                    required=False
-                )),
-                (self.lookup_kwarg_lte, forms.SplitDateTimeField(
-                    label='',
-                    widget=AdminSplitDateTime(attrs={'placeholder': _('To date')}),
-                    localize=True,
-                    required=False
-                )),
+            (self.lookup_kwarg_gte, forms.SplitDateTimeField(
+                label='',
+                widget=AdminSplitDateTime(attrs={'placeholder': _('From date')}),
+                localize=True,
+                required=False
+            )),
+            (self.lookup_kwarg_lte, forms.SplitDateTimeField(
+                label='',
+                widget=AdminSplitDateTime(attrs={'placeholder': _('To date')}),
+                localize=True,
+                required=False
+            )),
         ))
 
     def _make_query_filter(self, request, validated_data):

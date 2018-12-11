@@ -73,6 +73,9 @@ https://github.com/django/django/blob/stable/1.10.x/django/contrib/admin/templat
             var key_val = form_queries[i].split('=');
             var key = key_val[0];
             var date = key_val[1].split('%2F');
+            if (!date[0]) {
+                date = Date.now()
+            }
             for (var j=0; j<date.length; j++) {
                 date[j] = parseInt(date[j])
             }
@@ -114,7 +117,12 @@ https://github.com/django/django/blob/stable/1.10.x/django/contrib/admin/templat
                   }
                 }
             },
-            'format': 'YYYY/MM/DD'
+            'formatter': function(unixDate){
+                if (unixDate && Date.now() - unixDate > 2000) {
+                    return new persianDate(unixDate).toCalendar('persian').format('YYYY/MM/DD')
+                }
+                return null
+            }
         })
     });
 </script>

@@ -1,8 +1,9 @@
 {% load i18n admin_static %}
-<link rel="stylesheet" type="text/css" href="/static/rangefilter/css/persian-datepicker.min.css" />
-<script src="/static/rangefilter/js/alias-jquery.js"></script>
-<script src="/static/rangefilter/js/persian-date.min.js"></script>
-<script src="/static/rangefilter/js/persian-datepicker.min.js"></script>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rangefilter/css/persian-datepicker.min.css' %}" />
+<script src="{% static 'rangefilter/js/alias-jquery.js' %}"></script>
+<script src="{% static 'rangefilter/js/persian-date.min.js' %}"></script>
+<script src="{% static 'rangefilter/js/persian-datepicker.min.js' %}"></script>
 <h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}">
 <style>

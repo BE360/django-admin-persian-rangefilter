@@ -31,7 +31,7 @@ def get_package_data(package):
 
 setup(
     name='django-admin-rangefilter',
-    version='0.3.11',
+    version='0.3.12',
     url='https://github.com/silentsokolov/django-admin-rangefilter',
     license='MIT',
     description='django-admin-rangefilter app, add the filter by a custom date range on the admin UI.',

@@ -119,7 +119,7 @@ https://github.com/django/django/blob/stable/1.10.x/django/contrib/admin/templat
                 }
             },
             'formatter': function(unixDate){
-                if (unixDate && Date.now() - unixDate > 2000) {
+                if (unixDate) {
                     return new persianDate(unixDate).toCalendar('persian').format('YYYY/MM/DD')
                 }
                 return null
